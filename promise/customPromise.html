@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定义实现Promise</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  function createCustomPromise() {
+    // 1.分析Promise的功能
+    // 1.1 将异步任务转换成同步任务 （？）
+    // 1.2 支持链式调用（可以通过protoType链传递）
+    // 1.3 then方法确保了代码执行顺序，接受实例的resolve方法 （类似generator的yield）
+    // 1.4 catch方法捕获异常，接受实例的reject方法
+    // 1.5 finally方法是在所有then方法和catch方法执行完成后执行
+    // 1.6 all方法接受实例所有的resolve方法，遇到reject则停止
+    // 1.7 race方法接受实例任意的resolve方法
+    // 1.8 allSettled方法接受实例所有的resolve和reject方法，执行完成后停止
+    // 1.9 any方法接受实例任意的resolve方法，遇到reject则停止
+    // 1.10 try
+  }
+</script>
