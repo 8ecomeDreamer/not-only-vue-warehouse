@@ -18,6 +18,14 @@
       3.2
       then有两个实参,第一个是接收resolved状态的回调函数,第二个是接收rejected状态的回调函数。
     </div>
+    <div>
+      3.4 简易操作promise new Promise((resolve,reject) =>
+      {}).then().catch().finally()
+    </div>
+    <div>
+      3.5 promise技巧熟记
+      需要promise实例同时完成的话,使用promise.all方法。需要promise实例中任意一个完成的话,使用promise.race方法。若希望同时完成且完成状态有成功有失败的话,使用promise.allSettled方法。
+    </div>
   </body>
 </html>
 
