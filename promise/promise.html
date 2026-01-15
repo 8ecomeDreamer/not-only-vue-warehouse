@@ -1,34 +1,260 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Promise的基本使用</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f8;
+        display: flex;
+        justify-content: center;
+        padding: 40px;
+        margin: 0;
+      }
+
+      /* 容器卡片样式 */
+      .note-card {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 1000px; /* 稍微加宽以容纳表格 */
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      /* 标题样式 */
+      .note-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e1e4e8;
+        border-left: 5px solid #3498db;
+        padding-left: 10px;
+      }
+
+      /* 内容文本样式 */
+      .note-content {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 15px;
+        padding-left: 15px;
+      }
+
+      /* 代码片段样式 */
+      .code-snippet {
+        background-color: #282c34;
+        color: #abb2bf;
+        padding: 15px;
+        border-radius: 6px;
+        font-family: "Consolas", "Monaco", monospace;
+        font-size: 0.9rem;
+        overflow-x: auto;
+        margin-top: 10px;
+      }
+
+      /* API 列表样式 */
+      .api-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-left: 15px;
+        margin-bottom: 20px;
+      }
+
+      .api-tag {
+        background-color: #e3f2fd;
+        color: #1565c0;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      /* --- 表格样式适配 --- */
+      .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        font-size: 0.9rem; /* 表格字体稍微小一点 */
+        color: #444;
+        border-radius: 8px;
+        overflow: hidden; /* 配合圆角 */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .custom-table thead tr {
+        background-color: #f8f9fa;
+        color: #2c3e50;
+        text-align: left;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      .custom-table th,
+      .custom-table td {
+        padding: 12px 15px;
+        border: 1px solid #e9ecef;
+        vertical-align: top; /* 内容顶部对齐，适合长文本 */
+      }
+
+      /* 表头第一列样式 */
+      .custom-table th:first-child {
+        width: 80px;
+        text-align: center;
+        background-color: #e9ecef;
+      }
+
+      /* 表格第一列（行标题）样式 */
+      .custom-table td:first-child {
+        font-weight: bold;
+        background-color: #fafafa;
+        text-align: center;
+        width: 80px;
+      }
+
+      /* 斑马纹 */
+      .custom-table tbody tr:nth-of-type(even) {
+        background-color: #fdfdfd;
+      }
+
+      /* 鼠标悬停 */
+      .custom-table tbody tr:hover {
+        background-color: #f1f7ff;
+      }
+
+      /* 针对表格中的长文本优化 */
+      .table-text {
+        display: block;
+        line-height: 1.5;
+      }
+    </style>
   </head>
   <body>
-    <div>1.Promise的介绍</div>
-    <div>
-      promise主要应用于解决回调地狱的情况,其有三个主要状态:pending进行中、reject失败、fulFill成功。
-    </div>
-    <div>2.Promise常用api</div>
-    <div>then,catch,finally,all,race,allSettled,any,resolve,reject,try</div>
-    <div>3.查漏补缺</div>
-    <div>3.1 then方法会创造一个新的promise实例,因此可以进行链式调用</div>
-    <div>
-      3.2
-      then有两个实参,第一个是接收resolved状态的回调函数,第二个是接收rejected状态的回调函数。
-    </div>
-    <div>
-      3.4 简易操作promise new Promise((resolve,reject) =>
-      {}).then().catch().finally()
-    </div>
-    <div>
-      3.5 promise技巧熟记
-      需要promise实例同时完成的话,使用promise.all方法。需要promise实例中任意一个完成的话,使用promise.race方法。若希望同时完成且完成状态有成功有失败的话,使用promise.allSettled方法。
+    <div class="note-card">
+      <!-- 章节 1 -->
+      <div class="note-title">1. Promise 的介绍</div>
+      <div class="note-content">
+        Promise 主要应用于解决回调地狱的情况，其有三个主要状态：
+        <span style="color: #e67e22">pending</span>（进行中）、
+        <span style="color: #e74c3c">rejected</span>（失败）、
+        <span style="color: #27ae60">fulfilled</span>（成功）。
+      </div>
+
+      <!-- 章节 2 -->
+      <div class="note-title">2. Promise 常用 API</div>
+      <div class="api-list">
+        <span class="api-tag">then</span>
+        <span class="api-tag">catch</span>
+        <span class="api-tag">finally</span>
+        <span class="api-tag">all</span>
+        <span class="api-tag">race</span>
+        <span class="api-tag">allSettled</span>
+        <span class="api-tag">any</span>
+        <span class="api-tag">resolve</span>
+        <span class="api-tag">reject</span>
+        <span class="api-tag">try</span>
+      </div>
+
+      <!-- 章节 3 -->
+      <div class="note-title">3. 查漏补缺</div>
+
+      <div class="note-content">
+        <strong>3.1 链式调用原理</strong><br />
+        then 方法会创造一个新的 Promise 实例，因此可以进行链式调用。
+      </div>
+
+      <div class="note-content">
+        <strong>3.2 then 的参数</strong><br />
+        then 有两个实参，第一个是接收 resolved 状态的回调函数，第二个是接收
+        rejected 状态的回调函数。
+      </div>
+
+      <div class="note-content">
+        <strong>3.4 简易操作 Promise</strong>
+        <div class="code-snippet">
+          new Promise((resolve, reject) => {}).then().catch().finally()
+        </div>
+      </div>
+
+      <!-- 章节 3.5 表格部分 -->
+      <div class="note-title">3.5 Promise 技巧熟记</div>
+      <div style="padding-left: 15px">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>all</th>
+              <th>race</th>
+              <th>allSettled</th>
+              <th>any</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>触发时机</td>
+              <td>
+                <span class="table-text">
+                  <strong>全成功才成功：</strong><br />
+                  所有实例状态变成 fulfilled 才更改，任意一个为 rejected
+                  则直接返回 rejected。
+                </span>
+              </td>
+              <td>
+                <span class="table-text">
+                  <strong>谁快听谁的：</strong><br />
+                  任意一个传入的实例状态改变（无论成功或失败）则直接返回。
+                </span>
+              </td>
+              <td>
+                <span class="table-text">
+                  <strong>必须全部结束：</strong><br />
+                  所有实例状态改变才结束。与 all 的不同是，它不关注状态是
+                  fulfilled 或者 rejected，只看是否结束。
+                </span>
+              </td>
+              <td>
+                <span class="table-text">
+                  <strong>只要有一个成功：</strong><br />
+                  任意一个变成 fulfilled 状态，包装实例就会变成 fulfilled。<br />
+                  <strong>全败才败：</strong><br />
+                  如果所有参数实例都变成 rejected 状态，包装实例才会变成
+                  rejected。与 race 的不同是，它不会因为 promise 变成 rejected
+                  结束，而是等所有参数变成 rejected 才结束。
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>返回值</td>
+              <td>
+                <span class="table-text">
+                  若 fulfilled：各个函数返回值的数组。<br />
+                  若 rejected：第一个失败状态的返回值。
+                </span>
+              </td>
+              <td>
+                <span class="table-text">最先改变的实例的返回值。</span>
+              </td>
+              <td>
+                <span class="table-text">
+                  返回一个数组，包含所有 Promise 的状态对象（每个对象包含 status
+                  和 value/reason）。
+                </span>
+              </td>
+              <td>
+                <span class="table-text">
+                  若 fulfilled：第一个成功的返回值。<br />
+                  若 rejected：一个 AggregateError 对象（包含所有错误）。
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>
-
-<script></script>
-
-<style></style>
