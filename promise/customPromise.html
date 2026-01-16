@@ -9,17 +9,60 @@
 </html>
 
 <script>
-  function createCustomPromise() {
-    // 1.分析Promise的功能
-    // 1.1 将异步任务转换成同步任务 （？）
-    // 1.2 支持链式调用（可以通过protoType链传递）
-    // 1.3 then方法确保了代码执行顺序，接受实例的resolve方法 （类似generator的yield）
-    // 1.4 catch方法捕获异常，接受实例的reject方法
-    // 1.5 finally方法是在所有then方法和catch方法执行完成后执行
-    // 1.6 all方法接受实例所有的resolve方法，遇到reject则停止
-    // 1.7 race方法接受实例任意的resolve方法
-    // 1.8 allSettled方法接受实例所有的resolve和reject方法，执行完成后停止
-    // 1.9 any方法接受实例任意的resolve方法，遇到reject则停止
-    // 1.10 try
-  }
+  // function createCustomPromise() {
+  //   // 1.分析Promise的功能
+  //   // 1.1 将异步任务转换成同步任务 （？）
+  //   // 1.2 支持链式调用（可以通过protoType链传递）
+  //   // 1.3 resolve方法将pending状态转为fulFilled
+  //   // 1.4 reject方法将pending状态转为rejected
+  //   // 1.5 then方法确保了代码执行顺序，接受实例的resolve方法 （类似generator的yield）
+  //   // 1.6 catch方法捕获异常，接受实例的reject方法
+  //   // 1.7 finally方法是在所有then方法和catch方法执行完成后执行
+  //   // 1.8 all方法接受实例所有的resolve方法，遇到reject则停止
+  //   // 1.9 race方法接受实例任意的resolve方法
+  //   // 1.10 allSettled方法接受实例所有的resolve和reject方法，执行完成后停止
+  //   // 1.11 any方法接受实例任意的resolve方法，遇到reject则停止
+
+  //   // 创建Promise构造函数
+  //   function myPromise(executor) {
+  //     // 1.需要定义的是上下文、状态位、数值、成功状态回调函数、失败状态回调函数
+  //     var self = this;
+  //     self.status = "pending";
+  //     self.value = undefined;
+  //     self.onResolvedCallback = [];
+  //     self.onRejectedCallback = [];
+
+  //     // 2.定义resolve、reject处理成功和失败状态
+  //     function resolve(value) {
+  //       if (status === "pending") {
+  //         self.status = "fulFilled";
+  //         self.value = value;
+  //         for (const i = 0; (i = self.onResolvedCallback.length); i++) {
+  //           self.onResolvedCallback[i](value);
+  //         }
+  //       }
+  //     }
+
+  //     function reject(reason) {
+  //       if (status === "pending") {
+  //         self.status = "rejected";
+  //         self.value = reason;
+  //         for (const i = 0; (i = self.onRejectedCallback.length); i++) {
+  //           self.onRejectedCallback[i](reason);
+  //         }
+  //       }
+  //     }
+
+  //     // 3.try..catch捕获异常
+  //     try {
+  //       executor(resolve.bind(this), reject.bind(this));
+  //     } catch (e) {
+  //       reject(e);
+  //     }
+  //   }
+  // }
+
+  // const p1 = new createCustomPromise();
+
+  // console.log(p1);
 </script>
